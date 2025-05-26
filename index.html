@@ -1,1 +1,123 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shèn Lì</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #e0e0e0; /* Gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .page-container {
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            padding: 40px;
+            max-width: 600px; /* Adjust this value to control the overall size */
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 24px; /* Futuristic rounded corners */
+            overflow: hidden; /* Ensures content doesn't overflow rounded corners */
+        }
+        
+        .handwritten-container {
+            position: relative;
+            width: 100%;
+        }
+        
+        .handwritten-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .link {
+            position: absolute;
+            text-decoration: none;
+            background-color: #75a12e3b; /* Subtle blue shade */
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        /* Slightly more visible on hover */
+        .link:hover {
+            background-color: #75a12e6b;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="handwritten-container">
+            <!-- Replace with your actual image path -->
+            <img class="handwritten-image" src="index2.png" alt="Handwritten page">
+            
+            <!-- Clickable areas - completely invisible -->
+
+            <!-- Flickr link -->
+            <a class="link" style="left: 550px; top: 1270px; width: 160px; height: 50px;" 
+               href="https://flickr.com/photos/lishengo/"></a>
+
+            <a class="link" style="left: 980px; top: 1250px; width: 260px; height: 50px;" 
+               href="https://www.blurb.co.uk/b/8927246-bubble-trouble"></a>
+               
+            <!-- Notes link -->
+            <a class="link" style="left: 480px; top: 1535px; width: 160px; height: 50px;" 
+               href="tripos.html"></a>
+
+             <!-- Notes link -->
+            <a class="link" style="left: 580px; top: 1835px; width: 160px; height: 50px;" 
+               href="bubbles.html"></a>
+            
+
+               
+            <!-- Email link -->
+            <a class="link" style="left: 205px; top: 2410px; width: 190px; height: 50px;" 
+               href="mailto:lishengo@gmail.com"></a>
+        </div>
+    </div>
+    
+    <script>
+        // Script to ensure link positions adjust when image is resized
+        window.addEventListener('load', function() {
+            const image = document.querySelector('.handwritten-image');
+            const links = document.querySelectorAll('.link');
+            const originalWidth = image.naturalWidth;
+            
+            function adjustLinkPositions() {
+                const scaleFactor = image.width / originalWidth;
+                
+                links.forEach(link => {
+                    const originalStyle = link.getAttribute('style');
+                    const leftMatch = originalStyle.match(/left:\s*(\d+)px/);
+                    const topMatch = originalStyle.match(/top:\s*(\d+)px/);
+                    const widthMatch = originalStyle.match(/width:\s*(\d+)px/);
+                    const heightMatch = originalStyle.match(/height:\s*(\d+)px/);
+                    
+                    if (leftMatch && topMatch && widthMatch && heightMatch) {
+                        const originalLeft = parseInt(leftMatch[1]);
+                        const originalTop = parseInt(topMatch[1]);
+                        const originalWidth = parseInt(widthMatch[1]);
+                        const originalHeight = parseInt(heightMatch[1]);
+                        
+                        link.style.left = `${originalLeft * scaleFactor}px`;
+                        link.style.top = `${originalTop * scaleFactor}px`;
+                        link.style.width = `${originalWidth * scaleFactor}px`;
+                        link.style.height = `${originalHeight * scaleFactor}px`;
+                    }
+                });
+            }
+            
+            adjustLinkPositions();
+            window.addEventListener('resize', adjustLinkPositions);
+        });
+    </script>
+</body>
+</html>
